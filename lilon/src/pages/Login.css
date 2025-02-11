@@ -1,0 +1,61 @@
+/* Fullscreen Centered Background */
+.login-container {
+  background: linear-gradient(to left, #100e24, #3f0125);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Centered Card Wrapper */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+/* Login Card */
+.login-card {
+  max-width: 690px;
+  width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  padding: 30px;
+}
+
+/* Form Inputs */
+.input-group-text {
+  padding: 0px;
+  background: transparent;
+  border: none;
+  color: black;
+}
+
+.form-control {
+  border: none;
+  border-bottom: 2px solid #ddd;
+  border-radius: 0;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.form-control:focus {
+  box-shadow: none;
+  border-bottom: 2px solid #100e24;
+}
+
+/* Submit Button */
+.login-button {
+  background: #770648;
+  color: white;
+  font-weight: bold;
+  padding: 15px;
+  border: none;
+  border-radius: 0;
+}
+
+.login-button:hover {
+  background: #222;
+}
