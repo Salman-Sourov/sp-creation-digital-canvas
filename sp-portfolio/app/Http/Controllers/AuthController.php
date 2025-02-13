@@ -47,41 +47,53 @@ class AuthController extends Controller
 
     } // end method
 
-    public function storeUser(Request $request){
+    public function storeUser(Request $request)
+    {
         try {
-            // $validateUser = Validator::make($request->all(), 
-            // [
-            //     'name' => 'required',
-            //     'email' => 'required|email|unique:users,email',
-            //     'password' => 'required|min:6'
-            // ]);
-
-            // if($validateUser->fails()){
-            //     return response()->json([
-            //         'status' => false,
-            //         'message' => 'validation error',
-            //         'errors' => $validateUser->errors()
-            //     ], 401);
-            // }
-
+            // Validate the request data
+            $validator = Validator::make($request->all(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:6',
+            ]);
+    
+            // If validation fails, return error response
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Validation error',
+                    'errors' => $validator->errors(),
+                ], 422); // 422 is the HTTP status code for validation errors
+            }
+    
+            // Create the user
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password)
+                'password' => Hash::make($request->password),
             ]);
-
+    
+            // Generate a token for the user
+            $token = $user->createToken('app')->accessToken;
+    
+            // Return success response with token and user data
             return response()->json([
                 'status' => true,
-                'message' => 'User Created Successfully',
-                'token' => $user->createToken("app")->accessToken,
-                'user' => $user
-            ], 200);
-
+                'message' => 'User created successfully',
+                'token' => $token,
+                'user' => $user,
+            ], 201); // 201 is the HTTP status code for resource creation
+    
         } catch (\Throwable $th) {
+            // Log the error for debugging
+            Log::error('Error in storeUser method: ' . $th->getMessage());
+    
+            // Return error response
             return response()->json([
                 'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
+                'message' => 'An error occurred while creating the user',
+                'error' => $th->getMessage(),
+            ], 500); // 500 is the HTTP status code for server errors
         }
     }
     

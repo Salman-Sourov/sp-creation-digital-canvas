@@ -1,16 +1,21 @@
 import { Navigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 const ProtectedRoute = ({ children }) => {
   const location = useLocation();
-
-  // Check if user is authenticated
-  const isAuthenticated = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    const token = localStorage.getItem('access_token');
     const user = localStorage.getItem('user');
-    return user !== null;
-  };
+    return !!(token && user); // Convert to boolean
+  });
 
-  if (!isAuthenticated()) {
-    // Redirect to login page with return url
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    const user = localStorage.getItem('user');
+    setIsAuthenticated(!!(token && user));
+  }, [location]);
+
+  if (!isAuthenticated) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
@@ -18,4 +23,3 @@ const ProtectedRoute = ({ children }) => {
 };
 
 export default ProtectedRoute;
-
