@@ -105,11 +105,11 @@ const Contact = ({ data }) => {
                 <div className="row gx-3 gy-4">
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label className="form-label">First name</label>
+                      <label className="form-label">Name</label>
                       <input
                         name="name"
                         id="name"
-                        placeholder="Name *"
+                        placeholder="Enter your name"
                         className="form-control"
                         type="text"
                         onChange={handleInputChange}
@@ -120,11 +120,11 @@ const Contact = ({ data }) => {
                   </div>
                   <div className="col-md-6">
                     <div className="form-group">
-                      <label className="form-label">Your Email</label>
+                      <label className="form-label">Email</label>
                       <input
                         name="email"
                         id="email"
-                        placeholder="Email *"
+                        placeholder="Enter your email"
                         className="form-control"
                         type="email"
                         onChange={handleInputChange}
@@ -139,7 +139,7 @@ const Contact = ({ data }) => {
                       <input
                         name="subject"
                         id="subject"
-                        placeholder="Subject *"
+                        placeholder="Enter subject"
                         className="form-control"
                         type="text"
                         onChange={handleInputChange}
@@ -150,11 +150,11 @@ const Contact = ({ data }) => {
                   </div>
                   <div className="col-md-12">
                     <div className="form-group">
-                      <label className="form-label">Your message</label>
+                      <label className="form-label">Message</label>
                       <textarea
                         name="message"
                         id="message"
-                        placeholder="Your message *"
+                        placeholder="Enter your message"
                         rows={6}
                         className="form-control"
                         onChange={handleInputChange}
