@@ -1,42 +1,30 @@
-// In Sidebar.jsx
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaHome, FaUserAlt, FaCog } from 'react-icons/fa';
+// src/components/admin/Sidebar.jsx
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { FaHome, FaInfoCircle } from 'react-icons/fa';
 
 const Sidebar = () => {
-    const [isOpen, setIsOpen] = useState(false);
-
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-    };
+    const location = useLocation();
 
     return (
-        <div className={`sidebar ${isOpen ? 'open' : ''}`}>
+        <div className="sidebar">
             <div className="sidebar-header">
                 <h3>Admin Panel</h3>
             </div>
-            <div className="sidebar-nav">
+            <nav className="sidebar-nav">
                 <ul>
                     <li>
-                        <Link to="/home">
-                            <FaHome />
-                            <span>Home</span>
+                        <Link to="/admin" className={location.pathname === '/admin' ? 'active' : ''}>
+                            <FaHome /> Dashboard
                         </Link>
                     </li>
                     <li>
-                        <Link to="/profile">
-                            <FaUserAlt />
-                            <span>Profile</span>
-                        </Link>
-                    </li>
-                    <li>
-                        <Link to="/settings">
-                            <FaCog />
-                            <span>Settings</span>
+                        <Link to="/admin/about" className={location.pathname === '/admin/about' ? 'active' : ''}>
+                            <FaInfoCircle /> About
                         </Link>
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
     );
 };

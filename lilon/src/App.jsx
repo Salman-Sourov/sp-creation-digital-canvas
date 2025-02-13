@@ -1,4 +1,4 @@
-// src/App.js
+// src/App.jsx
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Home from './pages/Home';
@@ -12,7 +12,8 @@ import Login from './pages/Login';
 import AdminDashboard from './components/admin/AdminDashboard';
 import AboutPage from './components/admin/AboutPage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
-import AdminLayout from './components/admin/AdminLayout'; // Import Admin Layout
+import AdminLayout from './components/admin/AdminLayout';
+
 
 const App = () => {
   useEffect(() => {
@@ -29,14 +30,18 @@ const App = () => {
 
         <Route path="/login" element={<Login />} />
 
-        {/* Protected Admin Routes with Admin Layout */}
-        <Route path="/admin" element={
-          <ProtectedRoute>
-            <AdminLayout /> {/* Use AdminLayout for admin routes */}
-          </ProtectedRoute>
-        }>
+        {/* Protected Admin Routes */}
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<AdminDashboard />} />
           <Route path="about" element={<AboutPage />} />
+          {/* Add more admin routes here as needed */}
         </Route>
       </Routes>
     </BrowserRouter>
