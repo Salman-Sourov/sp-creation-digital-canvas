@@ -3,12 +3,20 @@ import { Icon } from '@iconify/react';
 import { useEffect } from 'react';
 import perser from 'html-react-parser';
 import { Link as ScrollLink } from "react-scroll";
+import { socialData } from '../../data.json';
+import axios from 'axios';
+import { useState } from 'react';
 
 
 const Hero = ({ data }) => {
   const { title, subTitle, ImgLink, phone, email, socialData } = data;
 
+  const [previews, setPreviews] = useState({
+    image: localStorage.getItem('hero_image') || ''
+  });
+
   useEffect(() => {
+    fetchHomeData();
     const handleScroll = () => {
       const scrollValue = window.scrollY;
       const heroElements = document.querySelector('.hb-me');
@@ -21,6 +29,30 @@ const Hero = ({ data }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const fetchHomeData = async () => {
+    try {
+      const response = await axios.get('http://127.0.0.1:8000/api/get-home')
+      const data = response.data;
+
+      if (data.data && data.data.length > 0) {
+        const homeData = data.data[0];
+        if (homeData.image) {
+          localStorage.setItem('hero_image', homeData.image);
+          setPreviews({
+            image: homeData.image
+          });
+        } else {
+          localStorage.removeItem('hero_image');
+          setPreviews({
+            image: ''
+          });
+        }
+      }
+    } catch(error) {
+      console.error('Error fetching home data:', error);
+    }
+  };
 
   return (
     <section id="home" className="home-section bg-dark">
@@ -43,7 +75,7 @@ const Hero = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="hb-me" style={{ backgroundImage: `url(${ImgLink})` }} data-aos="fade-left" data-aos-duration="800" data-aos-delay="800"/>
+      <div className="hb-me" style={{ backgroundImage: `url(${previews.image})` }} data-aos="fade-left" data-aos-duration="800" data-aos-delay="800"/>
       <div className="social-fix">
         <div className="social-links" >
           {

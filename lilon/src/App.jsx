@@ -11,6 +11,7 @@ import 'aos/dist/aos.css';
 import Login from './pages/Login';
 import AdminDashboard from './components/admin/AdminDashboard';
 import AboutPage from './components/admin/AboutPage';
+import HomePage from './components/admin/HomePage';
 import ProtectedRoute from './components/auth/ProtectedRoute';
 import AdminLayout from './components/admin/AdminLayout';
 
@@ -41,6 +42,7 @@ const App = () => {
         >
           <Route index element={<AdminDashboard />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path="home" element={<HomePage />} />
           {/* Add more admin routes here as needed */}
         </Route>
       </Routes>

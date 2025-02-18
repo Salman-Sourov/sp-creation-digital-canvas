@@ -4,9 +4,9 @@
     "logoLight": "/images/logo-light.svg"
   },
   "heroData": {
-    "title": "My name<br />is <b>Lilon</b> <span><br />Macwan...</span>",
-    "subTitle": "<span>Web Designer</span> based in <span>USA</span>",
-    "ImgLink": "/images/home-banner.png",
+    "title": "My name<br />is  <span><br />Saifuddin Siyam</span>",
+    "subTitle": "<span>Content Creator</span> based on <span>BD</span>",
+    "ImgLink": "/images/sp_pic.jpg",
     "phone": "+123 45 666 7788",
     "email": "mccandesigner@gmail.com",
     "btnText": "Work with me",

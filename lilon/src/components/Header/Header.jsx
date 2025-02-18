@@ -1,18 +1,61 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 import { Link } from 'react-router-dom';
 import { Link as ScrollLink } from 'react-scroll';
 import { socialData } from '../../data.json';
+import axios from 'axios';
 
 const Header = ({ data }) => {
-  const { logoDark, logoLight } = data;
-
-  const [mobileToggle, setMobileToggle] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleMobileToggle = () => {
-    setMobileToggle(!mobileToggle);
+    setIsOpen(!isOpen);
   };
+
+  const [previews, setPreviews] = useState({
+    logo: localStorage.getItem('logo_url'),
+    image: null
+  });
+
+  useEffect(() => {
+    fetchHomeData();
+  }, []);
+
+  const fetchHomeData = async () => {
+    try {
+        const token = localStorage.getItem('access_token');
+        const response = await axios.get('http://127.0.0.1:8000/api/get-home', {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const data = response.data;
+
+        if (data.data.length > 0) {
+            const homeData = data.data[0]; // Assuming you fetch multiple records but only need the first one
+
+            if (homeData.logo) {
+                localStorage.setItem('logo_url', homeData.logo);
+            }
+            setPreviews({
+                logo: homeData.logo,
+                image: homeData.image
+            });
+        } else {
+            localStorage.removeItem('logo_url');
+            setPreviews({
+                logo: null,
+                image: null
+            });
+        }
+    } catch (error) {
+        console.error('Error fetching home page data:', error);
+    } finally {
+        setLoading(false);
+    }
+};
 
   return (
     <header>
@@ -20,8 +63,8 @@ const Header = ({ data }) => {
       <div className="mob-header" onClick={handleMobileToggle}>
         <div className="mob-h-left">
           <Link className="navbar-brand" to="/">
-            <img className="logo-dark" title="" alt="" src={logoDark} />
-            <img className="logo-light" title="" alt="" src={logoLight} />
+            <img className="logo-dark" title="" alt="SP Creation" src={previews.logo} />
+            <img className="logo-light" title="" alt="SP Creation" src={previews.logo} />
           </Link>
         </div>
         <div className="mob-h-right">
@@ -34,7 +77,7 @@ const Header = ({ data }) => {
       {/* Header Top */}
       <div
         className={`header-left-fixed one-page-nav ${
-          mobileToggle ? 'menu-open' : ''
+          isOpen ? 'menu-open' : ''
         }`}
       >
         {/* Brand */}
@@ -43,14 +86,14 @@ const Header = ({ data }) => {
             <img
               className="logo-dark"
               title="Lilon"
-              alt="site-logo"
-              src={logoDark}
+              alt="SP Creation"
+              src={previews.logo}
             />
             <img
               className="logo-light"
               title="Lilon"
-              alt="site-logo"
-              src={logoLight}
+              alt="SP Creation"
+              src={previews.logo}
             />
           </Link>
         </div>
@@ -61,7 +104,7 @@ const Header = ({ data }) => {
               to="home"
               spy={true}
               duration={500}
-              onClick={() => setMobileToggle(false)}
+              onClick={() => setIsOpen(false)}
             >
               Home
             </ScrollLink>
@@ -71,7 +114,7 @@ const Header = ({ data }) => {
               to="about"
               spy={true}
               duration={500}
-              onClick={() => setMobileToggle(false)}
+              onClick={() => setIsOpen(false)}
             >
               About
             </ScrollLink>
@@ -81,7 +124,7 @@ const Header = ({ data }) => {
               to="services"
               spy={true}
               duration={500}
-              onClick={() => setMobileToggle(false)}
+              onClick={() => setIsOpen(false)}
             >
               Services
             </ScrollLink>
@@ -91,7 +134,7 @@ const Header = ({ data }) => {
               to="work"
               spy={true}
               duration={500}
-              onClick={() => setMobileToggle(false)}
+              onClick={() => setIsOpen(false)}
             >
               Portfolio
             </ScrollLink>
@@ -101,7 +144,7 @@ const Header = ({ data }) => {
               to="blog"
               spy={true}
               duration={500}
-              onClick={() => setMobileToggle(false)}
+              onClick={() => setIsOpen(false)}
             >
               Blog
             </ScrollLink>
@@ -111,7 +154,7 @@ const Header = ({ data }) => {
               to="contact"
               spy={true}
               duration={500}
-              onClick={() => setMobileToggle(false)}
+              onClick={() => setIsOpen(false)}
             >
               Contact
             </ScrollLink>
