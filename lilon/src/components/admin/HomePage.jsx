@@ -1,6 +1,9 @@
 // src/components/admin/HomePage.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const HomePage = () => {
     const [formData, setFormData] = useState({
@@ -55,66 +58,56 @@ const HomePage = () => {
 
     const handleFileChange = (e) => {
         const { name, files } = e.target;
-        if (files && files[0]) {
-            setFormData(prev => ({
-                ...prev,
-                [name]: files[0]
-            }));
-
-            // Create preview URL
+        if (files.length > 0) {
+            const selectedFile = files[0];
+            setFormData(prev => ({ ...prev, [name]: selectedFile }));
+    
+            // Create preview
             const reader = new FileReader();
             reader.onloadend = () => {
-                setPreviews(prev => ({
-                    ...prev,
-                    [name]: reader.result
-                }));
+                setPreviews(prev => ({ ...prev, [name]: reader.result }));
             };
-            reader.readAsDataURL(files[0]);
+            reader.readAsDataURL(selectedFile);
+    
+            // Debugging
+            console.log(`${name} file selected:`, selectedFile);
         }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setErrors({}); // Clear previous errors
+        setErrors({});
+    
         const formDataToSend = new FormData();
-        
-        if (formData.logo) {
-            formDataToSend.append('logo', formData.logo);
-        }
-        if (formData.image) {
-            formDataToSend.append('image', formData.image);
-        }
-
+        if (formData.logo) formDataToSend.append('logo', formData.logo);
+        if (formData.image) formDataToSend.append('image', formData.image);
+    
         try {
             const token = localStorage.getItem('access_token');
             await axios.post('http://127.0.0.1:8000/api/store-home', formDataToSend, {
                 headers: {
                     'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                }
+                    'Content-Type': 'multipart/form-data',
+                },
             });
-            alert('Home page updated successfully!');
-            // Clear the form data and reset file inputs
-            setFormData({
-                logo: null,
-                image: null
-            });
-            // Reset the file input elements
-            const logoInput = document.querySelector('input[name="logo"]');
-            const imageInput = document.querySelector('input[name="image"]');
-            if (logoInput) logoInput.value = '';
-            if (imageInput) imageInput.value = '';
-            
-            fetchHomeData(); // Refresh the data
+    
+            toast.success('Home page updated successfully!'); // Success message
+            fetchHomeData(); // Refresh preview after update
+    
         } catch (error) {
             console.error('Error updating home page:', error);
-            if (error.response && error.response.data && error.response.data.errors) {
+            
+            if (error.response && error.response.data.errors) {
                 setErrors(error.response.data.errors);
+                toast.error('Validation failed! Check inputs.');
             } else {
-                alert('Failed to update home page');
+                toast.error('Failed to update home page.');
             }
         }
     };
+    
+    
 
     if (loading) {
         return <div className="loading">Loading...</div>;
@@ -126,9 +119,7 @@ const HomePage = () => {
             <div className="row">
                 {/* Form Column */}
                 <div className="col-md-6">
-                    <form onSubmit={handleSubmit} className="home-form">
-                        
-                            
+                    <form onSubmit={handleSubmit} className="about-form">
                                 <div className="form-group mb-3">
                                     <label className="form-label small">Logo</label>
                                     <input
@@ -213,6 +204,7 @@ const HomePage = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer position="top-right" autoClose={1000} />
         </div>
     );
 };

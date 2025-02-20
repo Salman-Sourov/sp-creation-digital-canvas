@@ -4,7 +4,6 @@ import { headerData } from '../../data.json';
 import { useState, useEffect } from "react";
 import Preloader from "../Preloader/Preloader";
 import CustomCursor from "../CustomCursor/CustomCursor";
-import ChatBot from "../ChatBot";
 
 const Layout = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -22,7 +21,7 @@ const Layout = () => {
           <CustomCursor />
           <Header data={headerData} />
           <Outlet />
-          <ChatBot />
+          {/* <ChatBot /> */}
         </>
       )}
     </>

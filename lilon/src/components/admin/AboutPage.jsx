@@ -61,11 +61,11 @@ const AboutPage = () => {
     };
 
     return (
-        <div className="about-page">
+        <div className="about-page col-sm-12">
             {/* <h2>Edit About Page</h2> */}
-            <form onSubmit={handleSubmit} className="about-form">
+            <form onSubmit={handleSubmit} className="col-md-6 col-sm-12">
                 <div className="form-group">
-                    <label>Title</label>
+                    <label>"Quotation"</label>
                     <input
                         type="text"
                         name="title"
@@ -83,7 +83,7 @@ const AboutPage = () => {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-group ">
                     <label>Image</label>
                     <div className="file-upload-container">
                         <input

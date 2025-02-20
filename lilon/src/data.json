@@ -28,40 +28,20 @@
   "aboutData": {
     "aboutLeft": {
       "ImgLink": "/images/about-banner.png",
-      "name": "Lilon Macwan",
-      "designation": "Web Designer <span>based in</span> USA",
+      "name": "Saifuddin Siyam",
+      "designation": "Content creator <span>based in</span> BD",
       "resumeCv": "/Resume.pdf"
     },
     "aboutRight": {
       "aboutText": "Born in 2000, AB type living in USA. We provide on-screen design for websites and apps, as well as front-end implementation. We will continue to pursue a wide range of expressions and better code by pursuing our “likes”.",
       "contactInfo": [
         {
-          "icon": "phone",
-          "data": "+123 45 666 7788"
-        },
-        {
           "icon": "person",
-          "data": "Lilon Macwan"
+          "data": "SP. Creation"
         },
         {
           "icon": "envelope",
-          "data": "lilonesigner@gmail.com"
-        },
-        {
-          "icon": "map",
-          "data": "California, USA"
-        }
-      ],
-      "archivement": [
-        {
-          "number": "10+",
-          "meta": "Years <br /> experience...",
-          "text": "Hello there! My name is <span>Lilon Macwan</span>. I am a web designer & developer, and Im very passionate and dedicated to my work."
-        },
-        {
-          "number": "50+",
-          "meta": "Clients <br /> Worldwide...",
-          "text": "With 10+ years experience as a professional designer, I have acquired the skills to make your project a success."
+          "data": "spcreationcontact@gmail.com"
         }
       ],
       "note": "“Lorem ipsum dolor sit amet, consectetur adipiscing elit. Faucibus sed sit ultrices et sed metus sollicitudin.”"

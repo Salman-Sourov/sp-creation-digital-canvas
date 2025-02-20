@@ -25,11 +25,6 @@ const About = ({ data }) => {
               </div>
               <h3>{name}</h3>
               <p>{perser(designation)}</p>
-              <div className="btn-bar">
-                <a className="px-btn" href={resumeCv} download>
-                  Download CV <Icon icon="bi-download" />
-                </a>
-              </div>
             </div>
           </div>
           <div className="col-lg-7 ps-xl-5">
@@ -47,7 +42,7 @@ const About = ({ data }) => {
               ))}
             </div>
             <div className="about-exp">
-              <div className="row gy-4">
+              {/* <div className="row gy-4">
                 {archivement.map((element, index) => (
                   <div className="col-md-6" key={index}>
                     <div className="a-number">
@@ -57,7 +52,7 @@ const About = ({ data }) => {
                     <p className="lead">{perser(element.text)}</p>
                   </div>
                 ))}
-              </div>
+              </div> */}
               <blockquote>
                 <Icon icon="fa6-solid:quote-left" />
                 <p>{note}</p>

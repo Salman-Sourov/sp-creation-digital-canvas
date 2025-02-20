@@ -315,7 +315,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 7px;
     background: linear-gradient(135deg, #2C2938 0%, #1E1B29 100%);
     border: 2px dashed #3A3647;
     border-radius: 8px;
