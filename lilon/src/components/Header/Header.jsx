@@ -119,7 +119,7 @@ const Header = ({ data }) => {
               About
             </ScrollLink>
           </li>
-          <li>
+          {/* <li>
             <ScrollLink
               to="services"
               spy={true}
@@ -128,7 +128,7 @@ const Header = ({ data }) => {
             >
               Services
             </ScrollLink>
-          </li>
+          </li> */}
           <li>
             <ScrollLink
               to="work"

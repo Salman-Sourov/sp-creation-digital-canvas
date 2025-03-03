@@ -1,11 +1,11 @@
 import About from "../components/About/About";
 import Blog from "../components/Blog/Blog";
 import Contact from "../components/Contact/Contact";
-import Experience from "../components/Experience/Experience";
+// import Experience from "../components/Experience/Experience";
 import Footer from "../components/Footer/Footer";
 import Hero from "../components/Hero/Hero";
 import Portfolio from "../components/Portfolio/Portfolio";
-import Service from "../components/Service/Service";
+// import Service from "../components/Service/Service";
 import Testimonial from "../components/Testimonial/Testimonial";
 import data from "../data.json";
 
@@ -17,8 +17,8 @@ const Home = () => {
       <main className="wrapper">
         <Hero data={heroData} />
         <About data={aboutData} />
-        <Experience data={experienceData} />
-        <Service data={serviceData} />
+        {/* <Experience data={experienceData} /> */}
+        {/* <Service data={serviceData} /> */}
         <Portfolio data={portfolioData} />
         <Testimonial data={sliderData} />
         <Blog data={blogData} />

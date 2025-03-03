@@ -68,7 +68,7 @@ const Hero = ({ data }) => {
                   <Icon icon="bi:arrow-up-right" /></ScrollLink>
               </div>
               <div className="info-bar" data-aos="fade-up" data-aos-duration="800" data-aos-delay="600">
-                <p><Icon icon="bi-phone" /><span>{phone}</span></p>
+                
                 <p><Icon icon="bi-envelope" /><span>{email}</span></p>
               </div>
             </div>

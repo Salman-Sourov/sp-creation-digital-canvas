@@ -13,9 +13,9 @@ class AboutController extends Controller
         // dd($request->all());
         // Validate the request
         $validator = Validator::make($request->all(), [
-            'qoute' => 'sometimes',
-            'description' => 'sometimes',
-            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'quote' => 'sometimes', // Validate only if present
+            'description' => 'sometimes', // Validate only if present
+            'image' => 'nullable|mimes:jpeg,png,jpg,gif,svg|max:2048', // Optional, but must be valid if provided
         ]);
 
         if ($validator->fails()) {
